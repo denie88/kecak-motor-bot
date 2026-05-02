@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kecak Motor — Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f4f0;
+    --surface: #ffffff;
+    --border: rgba(0,0,0,0.08);
+    --text: #1a1a18;
+    --muted: #888880;
+    --accent: #d4002a;
+    --accent-light: #fff0f2;
+    --green: #0f6e56;
+    --green-light: #e1f5ee;
+    --amber: #b86e00;
+    --amber-light: #fff8e6;
+    --mono: 'DM Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); font-family: var(--sans); color: var(--text); min-height: 100vh; }
+
+  header {
+    background: var(--text);
+    padding: 0 32px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo { display: flex; align-items: center; gap: 10px; }
+  .logo-mark {
+    width: 28px; height: 28px; background: var(--accent);
+    border-radius: 6px; display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 600; color: #fff; font-family: var(--mono);
+  }
+  .logo-name { color: #fff; font-size: 15px; font-weight: 500; letter-spacing: -0.01em; }
+  .live-dot { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #9f9f97; }
+  .dot { width: 7px; height: 7px; background: #2ecc71; border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+  .main { padding: 28px 32px; max-width: 1100px; }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+  .stat-val { font-size: 32px; font-weight: 300; color: var(--text); font-family: var(--mono); line-height: 1; }
+  .stat-sub { font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .stat.accent { border-color: var(--accent); }
+  .stat.accent .stat-val { color: var(--accent); }
+
+  .section-title { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 14px; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .panel-header { padding: 14px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .panel-title { font-size: 13px; font-weight: 500; }
+  .refresh-btn { font-size: 11px; color: var(--muted); background: none; border: none; cursor: pointer; font-family: var(--sans); }
+  .refresh-btn:hover { color: var(--text); }
+
+  .booking-list { }
+  .booking-row {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 80px 1fr 100px 80px;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    transition: background 0.1s;
+  }
+  .booking-row:last-child { border-bottom: none; }
+  .booking-row:hover { background: var(--bg); }
+  .booking-id { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+  .booking-info { }
+  .booking-name { font-weight: 500; }
+  .booking-detail { font-size: 12px; color: var(--muted); margin-top: 1px; }
+  .booking-date { font-size: 12px; color: var(--muted); }
+  .badge {
+    display: inline-block; font-size: 10px; font-weight: 500;
+    padding: 3px 8px; border-radius: 20px; font-family: var(--mono);
+  }
+  .badge-green { background: var(--green-light); color: var(--green); }
+  .badge-amber { background: var(--amber-light); color: var(--amber); }
+
+  .service-bar-list { padding: 16px 20px; }
+  .service-bar-row { margin-bottom: 14px; }
+  .service-bar-label { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 5px; }
+  .service-bar-name { color: var(--text); font-weight: 500; text-transform: capitalize; }
+  .service-bar-count { color: var(--muted); font-family: var(--mono); }
+  .bar-bg { height: 6px; background: var(--bg); border-radius: 3px; overflow: hidden; }
+  .bar-fill { height: 6px; background: var(--accent); border-radius: 3px; transition: width 0.6s ease; }
+
+  .empty { padding: 40px 20px; text-align: center; color: var(--muted); font-size: 13px; }
+  .empty-icon { font-size: 28px; margin-bottom: 8px; opacity: 0.4; }
+
+  .wa-preview {
+    background: #e5ddd5;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 220px;
+  }
+  .bubble {
+    max-width: 78%;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .bubble-in { background: #fff; align-self: flex-start; border-top-left-radius: 2px; }
+  .bubble-out { background: #dcf8c6; align-self: flex-end; border-top-right-radius: 2px; }
+  .bubble-time { font-size: 10px; color: #999; text-align: right; margin-top: 2px; }
+
+  .setup-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 28px; }
+  .setup-title { font-size: 14px; font-weight: 500; margin-bottom: 16px; }
+  .setup-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .setup-step { border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+  .step-num { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+  .step-title { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+  .step-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .step-link { font-size: 11px; color: var(--accent); text-decoration: none; display: inline-block; margin-top: 6px; }
+  .step-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-mark">KM</div>
+    <span class="logo-name">Kecak Motor — Bot Dashboard</span>
+  </div>
+  <div class="live-dot">
+    <span class="dot"></span>
+    <span id="live-label">Connecting...</span>
+  </div>
+</header>
+
+<div class="main">
+
+  <!-- Stats -->
+  <div class="stat-grid">
+    <div class="stat accent">
+      <div class="stat-label">Total bookings</div>
+      <div class="stat-val" id="s-total">0</div>
+      <div class="stat-sub">all time</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Confirmed today</div>
+      <div class="stat-val" id="s-today">0</div>
+      <div class="stat-sub">via WhatsApp</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Active chats</div>
+      <div class="stat-val" id="s-active">0</div>
+      <div class="stat-sub">in progress now</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Top service</div>
+      <div class="stat-val" style="font-size:16px;padding-top:8px" id="s-top">—</div>
+      <div class="stat-sub">most booked</div>
+    </div>
+  </div>
+
+  <!-- Setup guide -->
+  <div class="setup-panel" id="setup-guide">
+    <div class="setup-title">Setup guide — deploy in 4 steps</div>
+    <div class="setup-steps">
+      <div class="setup-step">
+        <div class="step-num">Step 01</div>
+        <div class="step-title">Deploy to Railway</div>
+        <div class="step-desc">Free hosting. Upload this folder, click Deploy. You get a live URL instantly.</div>
+        <a href="https://railway.app" class="step-link" target="_blank">railway.app →</a>
+      </div>
+      <div class="setup-step">
+        <div class="step-num">Step 02</div>
+        <div class="step-title">Register Meta App</div>
+        <div class="step-desc">Create a free Meta Business account, add WhatsApp product, get your Phone Number ID.</div>
+        <a href="https://developers.facebook.com" class="step-link" target="_blank">developers.facebook.com →</a>
+      </div>
+      <div class="setup-step">
+        <div class="step-num">Step 03</div>
+        <div class="step-title">Set env variables</div>
+        <div class="step-desc">Add WA_TOKEN, PHONE_NUMBER_ID, STAFF_NUMBER in Railway's environment settings.</div>
+      </div>
+      <div class="setup-step">
+        <div class="step-num">Step 04</div>
+        <div class="step-title">Point webhook</div>
+        <div class="step-desc">In Meta dashboard, set webhook URL to your Railway URL + /webhook. Paste verify token.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bookings + service breakdown -->
+  <div class="grid2">
+    <div>
+      <div class="section-title">Recent bookings</div>
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">Booking list</span>
+          <button class="refresh-btn" onclick="loadData()">↻ Refresh</button>
+        </div>
+        <div class="booking-list" id="booking-list">
+          <div class="empty">
+            <div class="empty-icon">📋</div>
+            No bookings yet — bot is ready and waiting
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-title">Service breakdown</div>
+      <div class="panel" style="margin-bottom:16px">
+        <div class="panel-header"><span class="panel-title">Most booked services</span></div>
+        <div class="service-bar-list" id="service-bars">
+          <div class="empty"><div class="empty-icon">📊</div>Waiting for first bookings</div>
+        </div>
+      </div>
+
+      <div class="section-title">Chat preview (simulated)</div>
+      <div class="panel">
+        <div class="panel-header"><span class="panel-title">Sample conversation</span></div>
+        <div class="wa-preview" id="wa-preview"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const CHAT_DEMO = [
+  { dir: 'in', text: 'Halo, mau tanya harga servis', time: '09:14' },
+  { dir: 'out', text: '🏍️ Kecak Motor - Honda Authorized Dealer\n\nHalo! Ketik nomor pilihan:\n1️⃣ Booking servis\n2️⃣ Harga servis\n3️⃣ Stok unit Honda\n4️⃣ Jam & lokasi\n5️⃣ Bicara dengan staff', time: '09:14' },
+  { dir: 'in', text: '2', time: '09:15' },
+  { dir: 'out', text: '🔧 GANTI OLI\nRp 85.000 | 30 menit\n\nTUNE UP\nRp 150.000 | 1 jam\n\nSERVIS BESAR\nRp 350.000 | 2-3 jam', time: '09:15' },
+  { dir: 'in', text: 'mau booking ganti oli', time: '09:16' },
+  { dir: 'out', text: '✅ Booking Dikonfirmasi!\nID: BK1234567\nServis: GANTI OLI\nTanggal: 15/01/2025', time: '09:16' },
+];
+
+function renderChat() {
+  const el = document.getElementById('wa-preview');
+  el.innerHTML = CHAT_DEMO.map(m => `
+    <div>
+      <div class="bubble bubble-${m.dir === 'in' ? 'in' : 'out'}" style="white-space:pre-line">${m.text}</div>
+      <div class="bubble-time" style="text-align:${m.dir === 'in' ? 'left' : 'right'};padding:0 4px">${m.time}</div>
+    </div>
+  `).join('');
+}
+
+async function loadData() {
+  try {
+    const [stats, bookings] = await Promise.all([
+      fetch('/api/stats').then(r => r.json()),
+      fetch('/api/bookings').then(r => r.json()),
+    ]);
+
+    document.getElementById('s-total').textContent = stats.totalBookings;
+    document.getElementById('s-today').textContent = stats.confirmed;
+    document.getElementById('s-active').textContent = stats.activeSessions;
+    document.getElementById('s-top').textContent = stats.topService !== '-'
+      ? stats.topService.substring(0, 12) : '—';
+    document.getElementById('live-label').textContent = 'Live';
+
+    // Booking list
+    const bl = document.getElementById('booking-list');
+    if (bookings.length === 0) {
+      bl.innerHTML = '<div class="empty"><div class="empty-icon">📋</div>No bookings yet — bot is ready and waiting</div>';
+    } else {
+      bl.innerHTML = bookings.slice(-10).reverse().map(b => `
+        <div class="booking-row">
+          <div class="booking-id">${b.id}</div>
+          <div class="booking-info">
+            <div class="booking-name">${b.name}</div>
+            <div class="booking-detail">${b.service} · ${b.plate}</div>
+          </div>
+          <div class="booking-date">${b.date}</div>
+          <div><span class="badge badge-green">${b.status}</span></div>
+        </div>
+      `).join('');
+    }
+
+    // Service bars
+    const svcCounts = bookings.reduce((acc, b) => { acc[b.service] = (acc[b.service] || 0) + 1; return acc; }, {});
+    const maxCount = Math.max(...Object.values(svcCounts), 1);
+    const sbEl = document.getElementById('service-bars');
+    if (Object.keys(svcCounts).length === 0) {
+      sbEl.innerHTML = '<div class="empty"><div class="empty-icon">📊</div>Waiting for first bookings</div>';
+    } else {
+      sbEl.innerHTML = Object.entries(svcCounts)
+        .sort((a,b) => b[1]-a[1])
+        .map(([name, count]) => `
+          <div class="service-bar-row">
+            <div class="service-bar-label">
+              <span class="service-bar-name">${name}</span>
+              <span class="service-bar-count">${count}</span>
+            </div>
+            <div class="bar-bg"><div class="bar-fill" style="width:${Math.round(count/maxCount*100)}%"></div></div>
+          </div>
+        `).join('');
+    }
+
+  } catch (e) {
+    document.getElementById('live-label').textContent = 'Offline (start server first)';
+  }
+}
+
+renderChat();
+loadData();
+setInterval(loadData, 15000);
+</script>
+</body>
+</html>
