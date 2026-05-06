@@ -20,37 +20,52 @@ const CONFIG = {
 
 // ─── KNOWLEDGE BASE ──────────────────────────────────────────────────────────
 const KB = {
-  // Unit prices & promotions (update as needed)
+  // Unit prices & promotions — updated May 2026 (OTR Bali, sudah termasuk PPN, STNK, BBN, BPKB)
   units: {
     'honda beat': {
-      harga: '17.500.000',
-      warna: ['Merah', 'Hitam', 'Putih'],
+      harga: 'mulai Rp 20.170.000',
+      varian: 'Beat Sporty CBS / CBS ISS / Smart Key / Street',
       promo: 'Gratis aksesori senilai Rp 500.000 untuk pembelian bulan ini!',
     },
-    'honda vario 125': {
-      harga: '22.000.000',
-      warna: ['Hitam', 'Biru'],
-      promo: 'DP ringan mulai Rp 2.000.000. Cicilan ab Rp 600.000/bulan.',
-    },
-    'honda vario 160': {
-      harga: '27.500.000',
-      warna: ['Hitam'],
-      promo: 'Cashback Rp 1.000.000 untuk pembelian tunai bulan ini.',
-    },
-    'honda cbr 150r': {
-      harga: '36.000.000',
-      warna: ['Merah-Hitam'],
-      promo: 'Indent tersedia. Hubungi sales kami untuk info lebih lanjut.',
+    'honda genio': {
+      harga: 'mulai Rp 21.410.000',
+      varian: 'Genio CBS / CBS ISS',
+      promo: 'DP ringan, proses cepat. Hubungi sales kami!',
     },
     'honda scoopy': {
-      harga: '20.500.000',
-      warna: ['Putih', 'Hijau', 'Pink', 'Hitam'],
+      harga: 'mulai Rp 24.770.000',
+      varian: 'Scoopy Energetic / Fashion / Prestige / Stylish / Kuromi LE',
       promo: 'Gratis helm Honda senilai Rp 300.000 untuk pembelian bulan ini!',
     },
+    'honda vario 125': {
+      harga: 'mulai Rp 25.610.000',
+      varian: 'Vario 125 CBS / CBS ISS / Street',
+      promo: 'DP ringan mulai Rp 2.500.000. Cicilan mulai Rp 700.000/bulan.',
+    },
+    'honda stylo 160': {
+      harga: 'mulai Rp 30.720.000',
+      varian: 'Stylo 160 CBS / ABS',
+      promo: 'Model terbaru! Bonus aksesori untuk pembelian bulan ini.',
+    },
+    'honda vario 160': {
+      harga: 'mulai Rp 29.960.000',
+      varian: 'Vario 160 CBS / ABS',
+      promo: 'Cashback Rp 1.000.000 untuk pembelian tunai bulan ini.',
+    },
     'honda pcx 160': {
-      harga: '35.000.000',
-      warna: ['Hitam', 'Putih'],
+      harga: 'mulai Rp 35.520.000',
+      varian: 'PCX 160 CBS / ABS / ABS RoadSync',
       promo: 'Bonus aksesori + gratis servis pertama.',
+    },
+    'honda adv 160': {
+      harga: 'mulai Rp 38.570.000',
+      varian: 'ADV 160 CBS / ABS / ABS RoadSync',
+      promo: 'Adventure scooter terbaik! Hubungi sales untuk penawaran spesial.',
+    },
+    'honda cbr 150r': {
+      harga: 'mulai Rp 40.240.000',
+      varian: 'CBR 150R STD / ABS',
+      promo: 'Sport bike idaman! DP dan cicilan ringan tersedia.',
     },
   },
 
@@ -84,11 +99,12 @@ Type your choice:
 0️⃣  Main menu`;
 
 function unitList() {
-  let msg = '🏍️ *Harga Unit Honda & Promo – Kecak Motor*\n\n';
+  let msg = '🏍️ *Harga Unit Honda & Promo – Kecak Motor*\n';
+  msg += '_Update: Mei 2026 | OTR Bali (sudah termasuk PPN, STNK, BBN, BPKB)_\n\n';
   for (const [name, info] of Object.entries(KB.units)) {
     msg += `• *${name.toUpperCase()}*\n`;
-    msg += `  Harga: Rp ${info.harga}\n`;
-    msg += `  Warna: ${info.warna.join(', ')}\n`;
+    msg += `  💰 ${info.harga}\n`;
+    msg += `  📋 ${info.varian}\n`;
     msg += `  🎁 ${info.promo}\n\n`;
   }
   msg += '📞 Harga & promo bisa berubah sewaktu-waktu.\n';
@@ -138,7 +154,9 @@ function route(from, text) {
   if (input === '1' || input.includes('harga') || input.includes('promo') || input.includes('price')
     || input.includes('motor') || input.includes('unit') || input.includes('stok') || input.includes('stock')
     || input.includes('beat') || input.includes('vario') || input.includes('scoopy')
-    || input.includes('pcx') || input.includes('cbr')) {
+    || input.includes('pcx') || input.includes('cbr') || input.includes('genio')
+    || input.includes('stylo') || input.includes('adv') || input.includes('murah')
+    || input.includes('berapa') || input.includes('type') || input.includes('tipe')) {
     return unitList();
   }
 
