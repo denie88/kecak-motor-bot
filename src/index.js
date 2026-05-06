@@ -388,21 +388,22 @@ function unitDetail(familyKey) {
     msg += `• ${t.tipe}\n  💰 Rp ${t.harga}\n\n`;
   });
 
+  const isGift = (nama) => nama.toLowerCase().includes('gift');
+  const promoLine = (p) => isGift(p.nama)
+    ? `• ${p.nama}\n  _Syarat: ${p.syarat}_\n`
+    : `• ${p.nama}: *Rp ${p.diskon}*\n  _Syarat: ${p.syarat}_\n`;
+
   // National promos
   if (promo.nasional.length > 0) {
     msg += `🇮🇩 *Promo Nasional (AHM):*\n`;
-    promo.nasional.forEach(p => {
-      msg += `• ${p.nama}: *Rp ${p.diskon}*\n  _Syarat: ${p.syarat}_\n`;
-    });
+    promo.nasional.forEach(p => { msg += promoLine(p); });
     msg += '\n';
   }
 
   // Bali regional promos
   if (promo.bali.length > 0) {
     msg += `🌺 *Promo Regional Bali:*\n`;
-    promo.bali.forEach(p => {
-      msg += `• ${p.nama}: *Rp ${p.diskon}*\n  _Syarat: ${p.syarat}_\n`;
-    });
+    promo.bali.forEach(p => { msg += promoLine(p); });
     msg += '\n';
   }
 
