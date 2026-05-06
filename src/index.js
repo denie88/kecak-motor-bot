@@ -220,73 +220,68 @@ const PROMO = {
       { nama: 'Direct Gift Safety Tools',     diskon: '270.000', syarat: 'Konsumen Cash & Credit' },
       { nama: 'Direct Gift Jaket #Cari Aman', diskon: '115.000', syarat: 'Konsumen Cash & Credit' },
     ],
-    segmen: { diskon: '666.000', syarat: 'Karyawan Hotel / Villa / Homestay / Koperasi / SPPG — Cash & Credit' },
+    segmen: { diskon: '666.000', diskonBPR: '555.000', syarat: 'Karyawan Hotel / Villa / Homestay / Koperasi / SPPG — Cash & Credit' },
   },
   genio: {
     nasional: [],
     bali: [
       { nama: 'Institusi LPD & Koperasi',     diskon: '555.000', syarat: 'Penjualan CASH — wajib lampirkan PO' },
       { nama: 'Rental Bike',                  diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
-      { nama: 'BPR',                          diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
       { nama: 'Direct Gift Safety Tools',     diskon: '270.000', syarat: 'Konsumen Cash & Credit' },
       { nama: 'Direct Gift Jaket #Cari Aman', diskon: '115.000', syarat: 'Konsumen Cash & Credit' },
     ],
-    segmen: { diskon: '666.000', syarat: 'Karyawan Hotel / Villa / Homestay / Koperasi / SPPG — Cash & Credit' },
+    segmen: { diskon: '666.000', diskonBPR: '555.000', syarat: 'Karyawan Hotel / Villa / Homestay / Koperasi / SPPG — Cash & Credit' },
   },
   scoopy: {
     nasional: [
       { nama: 'Program Special Gift Scoopy', diskon: '277.500', syarat: 'Konsumen Cash & Credit' },
     ],
     bali: [
-      { nama: 'Sales Disc Scoopy ROTI',           diskon: '527.250', syarat: 'RO AT Low/Mid/CUB Honda. TI AT Low/Mid/CUB kompetitor via Motorku X' },
-      { nama: 'Special Gift Helm Scoopy Kalcer',  diskon: '244.200', syarat: 'Konsumen Cash & Credit' },
-      { nama: 'Institusi LPD & Koperasi',         diskon: '555.000', syarat: 'Penjualan CASH — wajib lampirkan PO' },
-      { nama: 'Rental Bike',                      diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
-      { nama: 'BPR',                              diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
-      { nama: 'Direct Gift Safety Tools',         diskon: '270.000', syarat: 'Konsumen Cash & Credit' },
-      { nama: 'Direct Gift Jaket #Cari Aman',     diskon: '115.000', syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Sales Disc Scoopy ROTI',          diskon: '527.250', syarat: 'RO AT Low/Mid/CUB Honda. TI AT Low/Mid/CUB kompetitor via Motorku X' },
+      { nama: 'Special Gift Helm Scoopy Kalcer', diskon: '244.200', syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Institusi LPD & Koperasi',        diskon: '555.000', syarat: 'Penjualan CASH — wajib lampirkan PO' },
+      { nama: 'Rental Bike',                     diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
+      { nama: 'Direct Gift Safety Tools',        diskon: '270.000', syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Direct Gift Jaket #Cari Aman',    diskon: '115.000', syarat: 'Konsumen Cash & Credit' },
     ],
-    segmen: { diskon: '527.250', syarat: 'Karyawan Hotel / Villa / Homestay / Koperasi / SPPG — Cash & Credit' },
+    segmen: { diskon: '527.250', diskonBPR: '555.000', syarat: 'Karyawan Hotel / Villa / Homestay / Koperasi / SPPG — Cash & Credit' },
   },
   vario125: {
     nasional: [],
     bali: [
-      { nama: 'Institusi LPD & Koperasi',      diskon: '555.000', syarat: 'Penjualan CASH — wajib lampirkan PO' },
-      { nama: 'Rental Bike',                   diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
-      { nama: 'BPR',                           diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
-      { nama: 'Diskon Display on AHASS',       diskon: '55.500',  syarat: 'Pembelian di AHASS on Display — Cash & Credit' },
-      { nama: 'Diskon Display on Fincoy',      diskon: '55.500',  syarat: 'Pembelian di Fincoy on Display — Cash & Credit' },
-      { nama: 'Direct Gift Safety Tools',      diskon: '270.000', syarat: 'Konsumen Cash & Credit' },
-      { nama: 'Direct Gift Jaket #Cari Aman',  diskon: '115.000', syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Institusi LPD & Koperasi',     diskon: '555.000', syarat: 'Penjualan CASH — wajib lampirkan PO' },
+      { nama: 'Rental Bike',                  diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
+      { nama: 'Diskon Display on AHASS',      diskon: '55.500',  syarat: 'Pembelian di AHASS on Display — Cash & Credit' },
+      { nama: 'Diskon Display on Fincoy',     diskon: '55.500',  syarat: 'Pembelian di Fincoy on Display — Cash & Credit' },
+      { nama: 'Direct Gift Safety Tools',     diskon: '270.000', syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Direct Gift Jaket #Cari Aman', diskon: '115.000', syarat: 'Konsumen Cash & Credit' },
     ],
-    segmen: { diskon: '666.000', syarat: 'Karyawan Hotel / Villa / Homestay / Koperasi / SPPG — Cash & Credit' },
+    segmen: { diskon: '666.000', diskonBPR: '555.000', syarat: 'Karyawan Hotel / Villa / Homestay / Koperasi / SPPG — Cash & Credit' },
   },
   stylo160: {
     nasional: [
       { nama: 'Program Special Gift Stylo (Jaket)', diskon: '444.000', syarat: 'Konsumen Cash & Credit' },
     ],
     bali: [
-      { nama: 'Trade In Move on to 160 Pride',   diskon: '444.000', syarat: 'RO AT di bawah 155cc kompetitor, via Motorku X' },
-      { nama: 'Special Gift Helm Stylo Y2K',     diskon: '244.200', syarat: 'Konsumen Cash & Credit' },
-      { nama: 'Institusi LPD & Koperasi',        diskon: '555.000', syarat: 'Penjualan CASH — wajib lampirkan PO' },
-      { nama: 'Rental Bike',                     diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
-      { nama: 'BPR',                             diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
-      { nama: 'Direct Gift Safety Tools',        diskon: '270.000', syarat: 'Konsumen Cash & Credit' },
-      { nama: 'Direct Gift Jaket #Cari Aman',    diskon: '115.000', syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Trade In Move on to 160 Pride', diskon: '444.000', syarat: 'RO AT di bawah 155cc kompetitor, via Motorku X' },
+      { nama: 'Special Gift Helm Stylo Y2K',   diskon: '244.200', syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Institusi LPD & Koperasi',      diskon: '555.000', syarat: 'Penjualan CASH — wajib lampirkan PO' },
+      { nama: 'Rental Bike',                   diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
+      { nama: 'Direct Gift Safety Tools',      diskon: '270.000', syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Direct Gift Jaket #Cari Aman',  diskon: '115.000', syarat: 'Konsumen Cash & Credit' },
     ],
-    segmen: { diskon: '444.000', syarat: 'Karyawan Hotel / Villa / Homestay / Koperasi / SPPG — Cash & Credit' },
+    segmen: { diskon: '444.000', diskonBPR: '555.000', syarat: 'Karyawan Hotel / Villa / Homestay / Koperasi / SPPG — Cash & Credit' },
   },
   vario160: {
     nasional: [],
     bali: [
-      { nama: 'Trade In Move on to 160 Pride',  diskon: '666.000', syarat: 'RO AT di bawah 155cc kompetitor, via Motorku X' },
-      { nama: 'Institusi LPD & Koperasi',       diskon: '555.000', syarat: 'Penjualan CASH — wajib lampirkan PO' },
-      { nama: 'Rental Bike',                    diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
-      { nama: 'BPR',                            diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
-      { nama: 'Direct Gift Safety Tools',       diskon: '270.000', syarat: 'Konsumen Cash & Credit' },
-      { nama: 'Direct Gift Jaket #Cari Aman',   diskon: '115.000', syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Trade In Move on to 160 Pride', diskon: '666.000', syarat: 'RO AT di bawah 155cc kompetitor, via Motorku X' },
+      { nama: 'Institusi LPD & Koperasi',      diskon: '555.000', syarat: 'Penjualan CASH — wajib lampirkan PO' },
+      { nama: 'Rental Bike',                   diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
+      { nama: 'Direct Gift Safety Tools',      diskon: '270.000', syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Direct Gift Jaket #Cari Aman',  diskon: '115.000', syarat: 'Konsumen Cash & Credit' },
     ],
-    segmen: { diskon: '666.000', syarat: 'Karyawan Hotel / Villa / Homestay / Koperasi / SPPG — Cash & Credit' },
+    segmen: { diskon: '666.000', diskonBPR: '555.000', syarat: 'Karyawan Hotel / Villa / Homestay / Koperasi / SPPG — Cash & Credit' },
   },
   pcx160: {
     nasional: [],
@@ -295,11 +290,10 @@ const PROMO = {
       { nama: 'PCX 160 Free Maintenance',      diskon: '250.000', syarat: 'Konsumen Cash & Credit' },
       { nama: 'Institusi LPD & Koperasi',      diskon: '555.000', syarat: 'Penjualan CASH — wajib lampirkan PO' },
       { nama: 'Rental Bike',                   diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
-      { nama: 'BPR',                           diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
       { nama: 'Direct Gift Safety Tools',      diskon: '270.000', syarat: 'Konsumen Cash & Credit' },
       { nama: 'Direct Gift Jaket #Cari Aman',  diskon: '115.000', syarat: 'Konsumen Cash & Credit' },
     ],
-    segmen: { diskon: '666.000', syarat: 'Karyawan Hotel / Villa / Homestay / Koperasi / SPPG — Cash & Credit' },
+    segmen: { diskon: '666.000', diskonBPR: '555.000', syarat: 'Karyawan Hotel / Villa / Homestay / Koperasi / SPPG — Cash & Credit' },
   },
   adv160: {
     nasional: [
@@ -310,11 +304,10 @@ const PROMO = {
       { nama: 'ADV 160 Free Maintenance',      diskon: '250.000', syarat: 'Konsumen Cash & Credit' },
       { nama: 'Institusi LPD & Koperasi',      diskon: '555.000', syarat: 'Penjualan CASH — wajib lampirkan PO' },
       { nama: 'Rental Bike',                   diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
-      { nama: 'BPR',                           diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
       { nama: 'Direct Gift Safety Tools',      diskon: '270.000', syarat: 'Konsumen Cash & Credit' },
       { nama: 'Direct Gift Jaket #Cari Aman',  diskon: '115.000', syarat: 'Konsumen Cash & Credit' },
     ],
-    segmen: { diskon: '111.000', syarat: 'Karyawan Hotel / Villa / Homestay / Koperasi / SPPG — Cash & Credit' },
+    segmen: { diskon: '111.000', diskonBPR: '555.000', syarat: 'Karyawan Hotel / Villa / Homestay / Koperasi / SPPG — Cash & Credit' },
   },
   electric: {
     nasional: [
@@ -335,6 +328,7 @@ const PROMO = {
       { nama: 'Direct Gift Jaket #Cari Aman', diskon: '115.000', syarat: 'Konsumen Cash & Credit' },
     ],
     segmen: null,
+    diskonBPR: null,
   },
 };
 
@@ -409,8 +403,8 @@ function unitDetail(familyKey) {
 
   // Segment prompt
   if (promo.segmen) {
-    msg += `❓ Apakah Bapak/Ibu bekerja di *hotel, villa, guest house, homestay, koperasi, atau instansi khusus*?\n`;
-    msg += `Ada diskon tambahan *Rp ${promo.segmen.diskon}* untuk segmen tersebut.\n`;
+    msg += `❓ Apakah Bapak/Ibu bekerja di *hotel, villa, guest house, homestay, koperasi, BPR, atau instansi khusus*?\n`;
+    msg += `Ada diskon tambahan untuk segmen tersebut.\n`;
     msg += `Ketik *YA* untuk info lebih lanjut.\n\n`;
   }
 
@@ -425,13 +419,18 @@ function segmentInfo(familyKey) {
   if (!promo.segmen) return null;
 
   let msg = `🎯 *Diskon Segmen Khusus – ${fam ? fam.nama : 'Honda'}*\n\n`;
-  msg += `Diskon tambahan: *Rp ${promo.segmen.diskon}*\n`;
-  msg += `_Syarat: ${promo.segmen.syarat}_\n\n`;
-  msg += `Berlaku untuk:\n`;
-  msg += `• Karyawan Hotel\n`;
-  msg += `• Karyawan Villa / Guest House / Homestay\n`;
-  msg += `• Karyawan Koperasi / Koperasi Merah Putih\n`;
-  msg += `• Karyawan SPPG\n\n`;
+
+  msg += `• Karyawan Hotel / Villa / Guest House / Homestay\n`;
+  msg += `  Karyawan Koperasi / Koperasi Merah Putih / SPPG\n`;
+  msg += `  Diskon: *Rp ${promo.segmen.diskon}*\n`;
+  msg += `  _Syarat: ${promo.segmen.syarat}_\n\n`;
+
+  if (promo.segmen.diskonBPR) {
+    msg += `• BPR (Bank Perkreditan Rakyat)\n`;
+    msg += `  Diskon: *Rp ${promo.segmen.diskonBPR}*\n`;
+    msg += `  _Syarat: Cash & Credit — wajib lampirkan PO_\n\n`;
+  }
+
   msg += `✅ Dapat digabung dengan promo nasional & Bali jika syarat terpenuhi.\n\n`;
   msg += `Mau kami hubungkan dengan Sales Advisor, atau ingin booking test ride langsung?\nKetik *4* untuk chat dengan sales kami.`;
   return msg;
@@ -481,7 +480,7 @@ function route(from, text) {
   const session = sessions[from];
   if (session && session.flow === 'segment_ask') {
     const isYes = ['ya', 'yes', 'iya', 'hotel', 'villa', 'homestay', 'guest house',
-                   'koperasi', 'sppg', 'instansi', 'kantor'].some(k => input.includes(k));
+                   'koperasi', 'sppg', 'instansi', 'kantor', 'bpr', 'bank'].some(k => input.includes(k));
     if (isYes) {
       delete sessions[from];
       return segmentInfo(session.model) ||
