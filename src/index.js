@@ -205,8 +205,9 @@ const KB = {
   },
 
   hours:   'Senin–Sabtu: 08.00–17.00 WITA\nMinggu: 09.00–14.00 WITA',
-  address: 'Jl. Gatot Subroto No. 88, Denpasar, Bali',
-  phone:   '(0361) 123-4567',
+  address: 'Jl. Raya Padang Luwih 166, Dalung, Kuta Utara, Bali',
+  gmaps:   'https://maps.app.goo.gl/ngYrnjaPjQJpv81s7',
+  phone:   '(0361) 413587',
 };
 
 // ─── SALES PROGRAM — Mei 2025 ─────────────────────────────────────────────────
@@ -438,7 +439,8 @@ function segmentInfo(familyKey) {
 
 function locationInfo() {
   return `📍 *Kecak Motor*\n\n` +
-    `🏢 ${KB.address}\n\n` +
+    `🏢 ${KB.address}\n` +
+    `🗺️ ${KB.gmaps}\n\n` +
     `🕐 *Jam Operasional:*\n${KB.hours}\n\n` +
     `📞 ${KB.phone}\n\n` +
     `_Ketik *0* untuk kembali ke menu._`;
