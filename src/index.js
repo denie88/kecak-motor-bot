@@ -18,29 +18,28 @@ const CONFIG = {
   PORT: process.env.PORT || 3000,
 };
 
-// ─── KNOWLEDGE BASE ──────────────────────────────────────────────────────────
+const sessions = {}; // tracks multi-step conversations
+
+// ─── PRICE CATALOG ───────────────────────────────────────────────────────────
 // All prices OTR Bali — SK Mei 2026 — sudah termasuk PPN, STNK, BBN, BPKB
 const KB = {
   catalog: {
     revo: {
-      nama: 'REVO',
-      keywords: ['revo'],
+      nama: 'REVO', keywords: ['revo'],
       types: [
         { tipe: 'Revo Fit',  harga: '19.090.000' },
         { tipe: 'Revo X',    harga: '20.810.000' },
       ],
     },
     suprax125: {
-      nama: 'SUPRA X 125',
-      keywords: ['supra x', 'supra'],
+      nama: 'SUPRA X 125', keywords: ['supra x', 'supra'],
       types: [
         { tipe: 'Supra X 125 SW', harga: '22.380.000' },
         { tipe: 'Supra X 125 CW', harga: '23.480.000' },
       ],
     },
     beat: {
-      nama: 'BEAT',
-      keywords: ['beat'],
+      nama: 'BEAT', keywords: ['beat'],
       types: [
         { tipe: 'Beat Sporty CBS',             harga: '20.170.000' },
         { tipe: 'Beat Sporty CBS ISS Deluxe',  harga: '20.970.000' },
@@ -49,17 +48,15 @@ const KB = {
       ],
     },
     genio: {
-      nama: 'GENIO',
-      keywords: ['genio'],
+      nama: 'GENIO', keywords: ['genio'],
       types: [
-        { tipe: 'Genio CBS',             harga: '21.410.000' },
-        { tipe: 'Genio CBS ISS',         harga: '21.870.000' },
+        { tipe: 'Genio CBS',               harga: '21.410.000' },
+        { tipe: 'Genio CBS ISS',           harga: '21.870.000' },
         { tipe: 'Genio CBS Special Color', harga: '21.680.000' },
       ],
     },
     scoopy: {
-      nama: 'SCOOPY',
-      keywords: ['scoopy'],
+      nama: 'SCOOPY', keywords: ['scoopy'],
       types: [
         { tipe: 'Scoopy Energetic Step Floor & Hook Plus', harga: '24.770.000' },
         { tipe: 'Scoopy Energetic Spion & Hook Plus',      harga: '24.910.000' },
@@ -72,8 +69,7 @@ const KB = {
       ],
     },
     vario125: {
-      nama: 'VARIO 125',
-      keywords: ['vario 125', 'vario125'],
+      nama: 'VARIO 125', keywords: ['vario 125', 'vario125'],
       types: [
         { tipe: 'Vario 125 CBS Spion Hook Plus (Tipe 1)',     harga: '25.610.000' },
         { tipe: 'Vario 125 CBS Spion Hook Plus (Tipe 2)',     harga: '26.190.000' },
@@ -84,33 +80,30 @@ const KB = {
       ],
     },
     stylo160: {
-      nama: 'STYLO 160',
-      keywords: ['stylo'],
+      nama: 'STYLO 160', keywords: ['stylo'],
       types: [
-        { tipe: 'Stylo 160 CBS Step Floor Plus',       harga: '30.720.000' },
-        { tipe: 'Stylo 160 CBS Step Floor KC Plus',    harga: '30.780.000' },
-        { tipe: 'Stylo 160 CBS Special Color',         harga: '32.995.000' },
-        { tipe: 'Stylo 160 ABS Step Floor Plus',       harga: '33.820.000' },
-        { tipe: 'Stylo 160 ABS Step Floor KC Plus',    harga: '33.880.000' },
-        { tipe: 'Stylo 160 ABS SPC Step Floor Plus',   harga: '35.380.000' },
-        { tipe: 'Stylo 160 ABS Special Color',         harga: '36.095.000' },
+        { tipe: 'Stylo 160 CBS Step Floor Plus',     harga: '30.720.000' },
+        { tipe: 'Stylo 160 CBS Step Floor KC Plus',  harga: '30.780.000' },
+        { tipe: 'Stylo 160 CBS Special Color',       harga: '32.995.000' },
+        { tipe: 'Stylo 160 ABS Step Floor Plus',     harga: '33.820.000' },
+        { tipe: 'Stylo 160 ABS Step Floor KC Plus',  harga: '33.880.000' },
+        { tipe: 'Stylo 160 ABS SPC Step Floor Plus', harga: '35.380.000' },
+        { tipe: 'Stylo 160 ABS Special Color',       harga: '36.095.000' },
       ],
     },
     vario160: {
-      nama: 'VARIO 160',
-      keywords: ['vario 160', 'vario160'],
+      nama: 'VARIO 160', keywords: ['vario 160', 'vario160'],
       types: [
-        { tipe: 'Vario 160 CBS Plus (Tipe 1)',        harga: '29.960.000' },
-        { tipe: 'Vario 160 CBS Plus (Tipe 2)',        harga: '30.210.000' },
-        { tipe: 'Vario 160 ABS Plus',                 harga: '32.990.000' },
+        { tipe: 'Vario 160 CBS Plus (Tipe 1)',            harga: '29.960.000' },
+        { tipe: 'Vario 160 CBS Plus (Tipe 2)',            harga: '30.210.000' },
+        { tipe: 'Vario 160 ABS Plus',                     harga: '32.990.000' },
         { tipe: 'Vario 160 CBS Spion Hook Plus (Tipe 1)', harga: '30.010.000' },
         { tipe: 'Vario 160 CBS Spion Hook Plus (Tipe 2)', harga: '30.260.000' },
-        { tipe: 'Vario 160 ABS Spion Hook Plus',      harga: '33.040.000' },
+        { tipe: 'Vario 160 ABS Spion Hook Plus',          harga: '33.040.000' },
       ],
     },
     pcx160: {
-      nama: 'PCX 160',
-      keywords: ['pcx'],
+      nama: 'PCX 160', keywords: ['pcx'],
       types: [
         { tipe: 'PCX 160 CBS',          harga: '35.520.000' },
         { tipe: 'PCX 160 ABS',          harga: '39.460.000' },
@@ -118,8 +111,7 @@ const KB = {
       ],
     },
     adv160: {
-      nama: 'ADV 160',
-      keywords: ['adv'],
+      nama: 'ADV 160', keywords: ['adv'],
       types: [
         { tipe: 'ADV 160 CBS',          harga: '38.570.000' },
         { tipe: 'ADV 160 ABS',          harga: '41.730.000' },
@@ -127,56 +119,49 @@ const KB = {
       ],
     },
     supragtr: {
-      nama: 'SUPRA GTR 150',
-      keywords: ['supra gtr', 'gtr'],
+      nama: 'SUPRA GTR 150', keywords: ['supra gtr', 'gtr'],
       types: [
         { tipe: 'New Supra GTR150 Sporty',    harga: '28.230.000' },
         { tipe: 'New Supra GTR150 Exclusive', harga: '28.480.000' },
       ],
     },
     sonic: {
-      nama: 'SONIC 150R',
-      keywords: ['sonic'],
+      nama: 'SONIC 150R', keywords: ['sonic'],
       types: [
-        { tipe: 'Sonic 150R',            harga: '29.250.000' },
-        { tipe: 'Sonic 150R HRR',        harga: '29.650.000' },
+        { tipe: 'Sonic 150R',             harga: '29.250.000' },
+        { tipe: 'Sonic 150R HRR',         harga: '29.650.000' },
         { tipe: 'Sonic 150R Matte Black', harga: '29.650.000' },
       ],
     },
     cb150x: {
-      nama: 'CB150X',
-      keywords: ['cb150x', 'cb 150x'],
+      nama: 'CB150X', keywords: ['cb150x', 'cb 150x'],
       types: [
         { tipe: 'CB150X STD', harga: '35.850.000' },
         { tipe: 'CB150X SE',  harga: '36.360.000' },
       ],
     },
     verza: {
-      nama: 'CB150 VERZA',
-      keywords: ['verza'],
+      nama: 'CB150 VERZA', keywords: ['verza'],
       types: [
         { tipe: 'CB150 Verza SW', harga: '25.520.000' },
         { tipe: 'CB150 Verza CW', harga: '26.180.000' },
       ],
     },
     cb150r: {
-      nama: 'CB150R STREETFIRE',
-      keywords: ['cb150r', 'streetfire'],
+      nama: 'CB150R STREETFIRE', keywords: ['cb150r', 'streetfire'],
       types: [
-        { tipe: 'CB150R Streetfire',                   harga: '35.260.000' },
-        { tipe: 'CB150R Streetfire Special Edition',   harga: '36.270.000' },
+        { tipe: 'CB150R Streetfire',                 harga: '35.260.000' },
+        { tipe: 'CB150R Streetfire Special Edition', harga: '36.270.000' },
       ],
     },
     crf150l: {
-      nama: 'CRF150L',
-      keywords: ['crf150'],
+      nama: 'CRF150L', keywords: ['crf150'],
       types: [
         { tipe: 'CRF150L', harga: '38.760.000' },
       ],
     },
     cbr150r: {
-      nama: 'CBR 150R',
-      keywords: ['cbr 150', 'cbr150'],
+      nama: 'CBR 150R', keywords: ['cbr 150', 'cbr150'],
       types: [
         { tipe: 'CBR 150R STD (Tipe 1)', harga: '40.240.000' },
         { tipe: 'CBR 150R STD (Tipe 2)', harga: '40.950.000' },
@@ -185,8 +170,7 @@ const KB = {
       ],
     },
     cbr250rr: {
-      nama: 'CBR 250RR',
-      keywords: ['cbr 250', 'cbr250'],
+      nama: 'CBR 250RR', keywords: ['cbr 250', 'cbr250'],
       types: [
         { tipe: 'CBR 250RR STD (Tipe 1)',      harga: '76.020.000' },
         { tipe: 'CBR 250RR STD (Tipe 2)',      harga: '80.390.000' },
@@ -196,8 +180,7 @@ const KB = {
       ],
     },
     electric: {
-      nama: 'ELECTRIC',
-      keywords: ['electric', 'listrik', 'icon e', 'cuv', 'em1'],
+      nama: 'ELECTRIC', keywords: ['electric', 'listrik', 'icon e', 'cuv', 'em1'],
       types: [
         { tipe: 'Icon e:',             harga: '28.378.000' },
         { tipe: 'CUV e:',              harga: '55.107.000' },
@@ -207,24 +190,152 @@ const KB = {
       ],
     },
     premium: {
-      nama: 'BIG BIKE / PREMIUM',
-      keywords: ['sh 150', 'sh150', 'forza', 'super cub', 'monkey', 'ct125', 'st125', 'dax', 'crf250', 'big bike', 'premium'],
+      nama: 'BIG BIKE / PREMIUM', keywords: ['sh 150', 'sh150', 'forza', 'super cub', 'monkey', 'ct125', 'st125', 'dax', 'crf250', 'big bike', 'premium'],
       types: [
-        { tipe: 'SH 150',         harga: '45.940.000' },
-        { tipe: 'ST125 Dax',      harga: '84.300.000' },
-        { tipe: 'CT125AM',        harga: '83.700.000' },
+        { tipe: 'SH 150',          harga: '45.940.000' },
+        { tipe: 'ST125 Dax',       harga: '84.300.000' },
+        { tipe: 'CT125AM',         harga: '83.700.000' },
         { tipe: 'Super Cub C 125', harga: '81.330.000' },
-        { tipe: 'Monkey',         harga: '89.010.000' },
-        { tipe: 'CRF250L',        harga: '92.740.000' },
-        { tipe: 'CRF250 Rally',   harga: '100.230.000' },
-        { tipe: 'Forza',          harga: '99.280.000' },
+        { tipe: 'Monkey',          harga: '89.010.000' },
+        { tipe: 'CRF250L',         harga: '92.740.000' },
+        { tipe: 'CRF250 Rally',    harga: '100.230.000' },
+        { tipe: 'Forza',           harga: '99.280.000' },
       ],
     },
   },
 
-  hours: 'Senin–Sabtu: 08.00–17.00 WITA\nMinggu: 09.00–14.00 WITA',
+  hours:   'Senin–Sabtu: 08.00–17.00 WITA\nMinggu: 09.00–14.00 WITA',
   address: 'Jl. Gatot Subroto No. 88, Denpasar, Bali',
-  phone: '(0361) 123-4567',
+  phone:   '(0361) 123-4567',
+};
+
+// ─── SALES PROGRAM — Mei 2025 ─────────────────────────────────────────────────
+// nasional = program dari AHM berlaku seluruh Indonesia
+// bali     = program regional Bali (dapat digabung nasional jika syarat terpenuhi)
+// segmen   = diskon tambahan untuk karyawan hotel/villa/homestay/koperasi/SPPG
+const PROMO = {
+  beat: {
+    nasional: [],
+    bali: [
+      { nama: 'Direct Gift Safety Tools',     diskon: '270.000', syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Direct Gift Jaket #Cari Aman', diskon: '115.000', syarat: 'Konsumen Cash & Credit' },
+    ],
+    segmen: { diskon: '666.000', syarat: 'Karyawan Hotel / Villa / Homestay / Koperasi / SPPG — Cash & Credit' },
+  },
+  genio: {
+    nasional: [],
+    bali: [
+      { nama: 'Institusi LPD & Koperasi',     diskon: '555.000', syarat: 'Penjualan CASH — wajib lampirkan PO' },
+      { nama: 'Rental Bike',                  diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
+      { nama: 'BPR',                          diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
+      { nama: 'Direct Gift Safety Tools',     diskon: '270.000', syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Direct Gift Jaket #Cari Aman', diskon: '115.000', syarat: 'Konsumen Cash & Credit' },
+    ],
+    segmen: { diskon: '666.000', syarat: 'Karyawan Hotel / Villa / Homestay / Koperasi / SPPG — Cash & Credit' },
+  },
+  scoopy: {
+    nasional: [
+      { nama: 'Program Special Gift Scoopy', diskon: '277.500', syarat: 'Konsumen Cash & Credit' },
+    ],
+    bali: [
+      { nama: 'Sales Disc Scoopy ROTI',           diskon: '527.250', syarat: 'RO AT Low/Mid/CUB Honda. TI AT Low/Mid/CUB kompetitor via Motorku X' },
+      { nama: 'Special Gift Helm Scoopy Kalcer',  diskon: '244.200', syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Institusi LPD & Koperasi',         diskon: '555.000', syarat: 'Penjualan CASH — wajib lampirkan PO' },
+      { nama: 'Rental Bike',                      diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
+      { nama: 'BPR',                              diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
+      { nama: 'Direct Gift Safety Tools',         diskon: '270.000', syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Direct Gift Jaket #Cari Aman',     diskon: '115.000', syarat: 'Konsumen Cash & Credit' },
+    ],
+    segmen: { diskon: '527.250', syarat: 'Karyawan Hotel / Villa / Homestay / Koperasi / SPPG — Cash & Credit' },
+  },
+  vario125: {
+    nasional: [],
+    bali: [
+      { nama: 'Institusi LPD & Koperasi',      diskon: '555.000', syarat: 'Penjualan CASH — wajib lampirkan PO' },
+      { nama: 'Rental Bike',                   diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
+      { nama: 'BPR',                           diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
+      { nama: 'Diskon Display on AHASS',       diskon: '55.500',  syarat: 'Pembelian di AHASS on Display — Cash & Credit' },
+      { nama: 'Diskon Display on Fincoy',      diskon: '55.500',  syarat: 'Pembelian di Fincoy on Display — Cash & Credit' },
+      { nama: 'Direct Gift Safety Tools',      diskon: '270.000', syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Direct Gift Jaket #Cari Aman',  diskon: '115.000', syarat: 'Konsumen Cash & Credit' },
+    ],
+    segmen: { diskon: '666.000', syarat: 'Karyawan Hotel / Villa / Homestay / Koperasi / SPPG — Cash & Credit' },
+  },
+  stylo160: {
+    nasional: [
+      { nama: 'Program Special Gift Stylo (Jaket)', diskon: '444.000', syarat: 'Konsumen Cash & Credit' },
+    ],
+    bali: [
+      { nama: 'Trade In Move on to 160 Pride',   diskon: '444.000', syarat: 'RO AT di bawah 155cc kompetitor, via Motorku X' },
+      { nama: 'Special Gift Helm Stylo Y2K',     diskon: '244.200', syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Institusi LPD & Koperasi',        diskon: '555.000', syarat: 'Penjualan CASH — wajib lampirkan PO' },
+      { nama: 'Rental Bike',                     diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
+      { nama: 'BPR',                             diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
+      { nama: 'Direct Gift Safety Tools',        diskon: '270.000', syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Direct Gift Jaket #Cari Aman',    diskon: '115.000', syarat: 'Konsumen Cash & Credit' },
+    ],
+    segmen: { diskon: '444.000', syarat: 'Karyawan Hotel / Villa / Homestay / Koperasi / SPPG — Cash & Credit' },
+  },
+  vario160: {
+    nasional: [],
+    bali: [
+      { nama: 'Trade In Move on to 160 Pride',  diskon: '666.000', syarat: 'RO AT di bawah 155cc kompetitor, via Motorku X' },
+      { nama: 'Institusi LPD & Koperasi',       diskon: '555.000', syarat: 'Penjualan CASH — wajib lampirkan PO' },
+      { nama: 'Rental Bike',                    diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
+      { nama: 'BPR',                            diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
+      { nama: 'Direct Gift Safety Tools',       diskon: '270.000', syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Direct Gift Jaket #Cari Aman',   diskon: '115.000', syarat: 'Konsumen Cash & Credit' },
+    ],
+    segmen: { diskon: '666.000', syarat: 'Karyawan Hotel / Villa / Homestay / Koperasi / SPPG — Cash & Credit' },
+  },
+  pcx160: {
+    nasional: [],
+    bali: [
+      { nama: 'Trade In Move on to 160 Pride', diskon: '666.000', syarat: 'RO AT di bawah 155cc kompetitor, via Motorku X' },
+      { nama: 'PCX 160 Free Maintenance',      diskon: '250.000', syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Institusi LPD & Koperasi',      diskon: '555.000', syarat: 'Penjualan CASH — wajib lampirkan PO' },
+      { nama: 'Rental Bike',                   diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
+      { nama: 'BPR',                           diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
+      { nama: 'Direct Gift Safety Tools',      diskon: '270.000', syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Direct Gift Jaket #Cari Aman',  diskon: '115.000', syarat: 'Konsumen Cash & Credit' },
+    ],
+    segmen: { diskon: '666.000', syarat: 'Karyawan Hotel / Villa / Homestay / Koperasi / SPPG — Cash & Credit' },
+  },
+  adv160: {
+    nasional: [
+      { nama: 'Program Sales Disc ADV 160', diskon: '1.110.000', syarat: 'Konsumen Cash & Credit' },
+    ],
+    bali: [
+      { nama: 'Trade In Move on to 160 Pride', diskon: '111.000', syarat: 'RO AT di bawah 155cc kompetitor, via Motorku X' },
+      { nama: 'ADV 160 Free Maintenance',      diskon: '250.000', syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Institusi LPD & Koperasi',      diskon: '555.000', syarat: 'Penjualan CASH — wajib lampirkan PO' },
+      { nama: 'Rental Bike',                   diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
+      { nama: 'BPR',                           diskon: '555.000', syarat: 'Cash & Credit — wajib lampirkan PO' },
+      { nama: 'Direct Gift Safety Tools',      diskon: '270.000', syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Direct Gift Jaket #Cari Aman',  diskon: '115.000', syarat: 'Konsumen Cash & Credit' },
+    ],
+    segmen: { diskon: '111.000', syarat: 'Karyawan Hotel / Villa / Homestay / Koperasi / SPPG — Cash & Credit' },
+  },
+  electric: {
+    nasional: [
+      { nama: 'Sales Disc EM1 e:',    diskon: '22.533.000', syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Voucher EM1 e:',       diskon: '6.000.000',  syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Sales Disc Icon e:',   diskon: '6.105.000',  syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Voucher CUV e:',       diskon: '12.000.000', syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Sales Disc CUV e:',    diskon: '24.087.000', syarat: 'Konsumen Cash & Credit' },
+    ],
+    bali: [],
+    segmen: null,
+  },
+  // default for models not listed above
+  _default: {
+    nasional: [],
+    bali: [
+      { nama: 'Direct Gift Safety Tools',     diskon: '270.000', syarat: 'Konsumen Cash & Credit' },
+      { nama: 'Direct Gift Jaket #Cari Aman', diskon: '115.000', syarat: 'Konsumen Cash & Credit' },
+    ],
+    segmen: null,
+  },
 };
 
 // ─── MENU TEMPLATES ──────────────────────────────────────────────────────────
@@ -252,31 +363,76 @@ Type your choice:
 
 // ─── RESPONSE FUNCTIONS ───────────────────────────────────────────────────────
 
-// Overview: all model families with entry price
 function unitOverview() {
   let msg = '🏍️ *Daftar Model Honda – Kecak Motor*\n';
   msg += '_OTR Bali | SK Mei 2026 | Termasuk PPN, STNK, BBN, BPKB_\n\n';
-  msg += 'Ketik nama model untuk melihat semua tipe & harga:\n\n';
+  msg += 'Ketik nama model untuk melihat semua tipe, harga & promo:\n\n';
   for (const [, fam] of Object.entries(KB.catalog)) {
     const minPrice = Math.min(...fam.types.map(t => parseInt(t.harga.replace(/\./g, ''))));
-    const hargaMin = minPrice.toLocaleString('id-ID');
-    msg += `• *${fam.nama}* — mulai Rp ${hargaMin}\n`;
+    msg += `• *${fam.nama}* — mulai Rp ${minPrice.toLocaleString('id-ID')}\n`;
   }
-  msg += '\nContoh: ketik *beat* atau *scoopy* untuk detail lengkap.\n';
+  msg += '\nContoh: ketik *beat*, *scoopy*, *vario 125*\n';
   msg += 'Ketik *4* untuk tanya langsung ke sales kami.';
   return msg;
 }
 
-// Detail: all types for one family
 function unitDetail(familyKey) {
   const fam = KB.catalog[familyKey];
   if (!fam) return null;
+  const promo = PROMO[familyKey] || PROMO._default;
+
   let msg = `🏍️ *${fam.nama} – Harga OTR Bali (Mei 2026)*\n\n`;
+
+  // Prices
   fam.types.forEach(t => {
     msg += `• ${t.tipe}\n  💰 Rp ${t.harga}\n\n`;
   });
-  msg += '📞 Harga dapat berubah sewaktu-waktu.\n';
-  msg += 'Ketik *4* untuk tanya sales atau *1* untuk daftar model lain.';
+
+  // National promos
+  if (promo.nasional.length > 0) {
+    msg += `🇮🇩 *Promo Nasional (AHM):*\n`;
+    promo.nasional.forEach(p => {
+      msg += `• ${p.nama}: *Rp ${p.diskon}*\n  _Syarat: ${p.syarat}_\n`;
+    });
+    msg += '\n';
+  }
+
+  // Bali regional promos
+  if (promo.bali.length > 0) {
+    msg += `🌺 *Promo Regional Bali:*\n`;
+    promo.bali.forEach(p => {
+      msg += `• ${p.nama}: *Rp ${p.diskon}*\n  _Syarat: ${p.syarat}_\n`;
+    });
+    msg += '\n';
+  }
+
+  // Segment prompt
+  if (promo.segmen) {
+    msg += `❓ Apakah Bapak/Ibu bekerja di *hotel, villa, guest house, homestay, koperasi, atau instansi khusus*?\n`;
+    msg += `Ada diskon tambahan *Rp ${promo.segmen.diskon}* untuk segmen tersebut.\n`;
+    msg += `Ketik *YA* untuk info lebih lanjut.\n\n`;
+  }
+
+  msg += `📞 Harga & promo dapat berubah sewaktu-waktu.\n`;
+  msg += `Ketik *4* untuk tanya sales atau *1* untuk daftar model lain.`;
+  return msg;
+}
+
+function segmentInfo(familyKey) {
+  const fam = KB.catalog[familyKey];
+  const promo = PROMO[familyKey] || PROMO._default;
+  if (!promo.segmen) return null;
+
+  let msg = `🎯 *Diskon Segmen Khusus – ${fam ? fam.nama : 'Honda'}*\n\n`;
+  msg += `Diskon tambahan: *Rp ${promo.segmen.diskon}*\n`;
+  msg += `_Syarat: ${promo.segmen.syarat}_\n\n`;
+  msg += `Berlaku untuk:\n`;
+  msg += `• Karyawan Hotel\n`;
+  msg += `• Karyawan Villa / Guest House / Homestay\n`;
+  msg += `• Karyawan Koperasi / Koperasi Merah Putih\n`;
+  msg += `• Karyawan SPPG\n\n`;
+  msg += `✅ Dapat digabung dengan promo nasional & Bali jika syarat terpenuhi.\n\n`;
+  msg += `Mau kami hubungkan dengan Sales Advisor, atau ingin booking test ride langsung?\nKetik *4* untuk chat dengan sales kami.`;
   return msg;
 }
 
@@ -297,48 +453,62 @@ function creditInfo() {
     `✅ DP mulai dari 10%\n` +
     `✅ Tenor 12–36 bulan\n` +
     `✅ Proses cepat & mudah\n\n` +
-    `Untuk simulasi kredit, ketik *4* untuk chat langsung dengan sales kami.\n\n` +
+    `Ketik *4* untuk simulasi kredit dengan sales kami.\n\n` +
     `📞 ${KB.phone}\n\n` +
     `_Ketik *0* untuk kembali ke menu._`;
 }
 
 // ─── MAIN MESSAGE ROUTER ─────────────────────────────────────────────────────
 function detectLanguage(text) {
-  const enWords = ['hello', 'hi', 'help', 'price', 'stock', 'how', 'what', 'credit', 'promo'];
-  return enWords.some(w => text.toLowerCase().includes(w)) ? 'en' : 'id';
+  return ['hello', 'hi', 'help', 'price', 'stock', 'how', 'what', 'credit', 'promo']
+    .some(w => text.toLowerCase().includes(w)) ? 'en' : 'id';
 }
 
 function findFamily(input) {
-  // Check each family's keywords
   for (const [key, fam] of Object.entries(KB.catalog)) {
     if (fam.keywords.some(kw => input.includes(kw))) return key;
   }
-  // Special: "vario" alone without number → ask which one
   if (input.includes('vario')) return 'vario_ask';
-  // Special: "cbr" alone → ask which one
-  if (input.includes('cbr')) return 'cbr_ask';
+  if (input.includes('cbr'))   return 'cbr_ask';
   return null;
 }
 
 function route(from, text) {
   const input = text.trim().toLowerCase();
 
-  // Menu / greeting
+  // ── Handle active segment session ──
+  const session = sessions[from];
+  if (session && session.flow === 'segment_ask') {
+    const isYes = ['ya', 'yes', 'iya', 'hotel', 'villa', 'homestay', 'guest house',
+                   'koperasi', 'sppg', 'instansi', 'kantor'].some(k => input.includes(k));
+    if (isYes) {
+      delete sessions[from];
+      return segmentInfo(session.model) ||
+        `Maaf, tidak ada diskon segmen tersedia untuk model ini.\n\nKetik *4* untuk tanya sales atau *0* untuk menu.`;
+    } else {
+      delete sessions[from];
+      return `Baik! Untuk info lebih lanjut, ketik *4* untuk chat dengan sales kami.\n\n_Ketik *0* untuk menu._`;
+    }
+  }
+
+  // ── Menu / greeting ──
   if (['menu', '0', 'halo', 'hi', 'hello', 'hai', 'mulai', 'start'].some(k => input.includes(k))) {
     return detectLanguage(input) === 'en' ? MENU_EN : MENU;
   }
 
-  // 1 — Show model overview
+  // ── Option 1: model overview ──
   if (input === '1' || input === 'harga' || input.includes('daftar motor')
     || input.includes('list motor') || input.includes('semua motor')) {
     return unitOverview();
   }
 
-  // Model keyword → show specific family detail
-  if (input.includes('harga') || input.includes('berapa') || input.includes('tipe')
-    || input.includes('type') || input.includes('promo') || input.includes('motor')
-    || input.includes('unit') || input.includes('stok') || input.includes('stock')
-    || input.match(/\b(revo|beat|genio|scoopy|vario|stylo|pcx|adv|sonic|verza|cbr|crf|forza|monkey)\b/)) {
+  // ── Model keyword → family detail ──
+  const modelTriggers = ['harga', 'berapa', 'tipe', 'type', 'promo', 'motor', 'unit',
+    'stok', 'stock', 'beat', 'genio', 'scoopy', 'vario', 'stylo', 'pcx', 'adv',
+    'sonic', 'verza', 'cbr', 'crf', 'forza', 'monkey', 'revo', 'supra'];
+  const hasModelTrigger = modelTriggers.some(k => input.includes(k));
+
+  if (hasModelTrigger) {
     const familyKey = findFamily(input);
     if (familyKey === 'vario_ask') {
       return `Anda mencari Vario tipe berapa?\n\n• Ketik *vario 125* untuk Vario 125\n• Ketik *vario 160* untuk Vario 160\n• Ketik *stylo* untuk Stylo 160`;
@@ -346,25 +516,31 @@ function route(from, text) {
     if (familyKey === 'cbr_ask') {
       return `Anda mencari CBR tipe berapa?\n\n• Ketik *cbr 150* untuk CBR 150R\n• Ketik *cbr 250* untuk CBR 250RR`;
     }
-    if (familyKey) return unitDetail(familyKey);
+    if (familyKey) {
+      const promo = PROMO[familyKey] || PROMO._default;
+      if (promo.segmen) {
+        sessions[from] = { flow: 'segment_ask', model: familyKey };
+      }
+      return unitDetail(familyKey);
+    }
     return unitOverview();
   }
 
-  // 2 — Jam & lokasi
+  // ── Option 2: location ──
   if (input === '2' || input.includes('jam') || input.includes('alamat') || input.includes('lokasi')
-    || input.includes('address') || input.includes('location') || input.includes('hours')
-    || input.includes('buka') || input.includes('tutup')) {
+    || input.includes('address') || input.includes('location') || input.includes('buka')
+    || input.includes('tutup')) {
     return locationInfo();
   }
 
-  // 3 — Kredit & pembiayaan
+  // ── Option 3: credit ──
   if (input === '3' || input.includes('kredit') || input.includes('cicil') || input.includes('dp')
     || input.includes('finance') || input.includes('loan') || input.includes('angsuran')
     || input.includes('tenor')) {
     return creditInfo();
   }
 
-  // 4 — Escalate to staff
+  // ── Option 4: escalate ──
   if (input === '4' || input.includes('staff') || input.includes('sales') || input.includes('manusia')
     || input.includes('human') || input.includes('cs') || input.includes('admin')
     || input.includes('hubungi')) {
@@ -372,13 +548,13 @@ function route(from, text) {
     return `👤 Oke! Saya sudah menghubungi staff kami.\n\nStaff kami akan membalas dalam beberapa menit.\n\nJam operasional: ${KB.hours}\n\n_Ketik *0* untuk menu._`;
   }
 
-  // Warranty
+  // ── Warranty ──
   if (input.includes('warranty') || input.includes('garansi')) {
-    return `🛡️ *Garansi Honda*\n\nUnit baru: garansi 3 tahun atau 30.000 km\nSuku cadang resmi: garansi 6 bulan\n\nUntuk klaim garansi, ketik *4* untuk chat dengan staff kami.\n\n_Ketik *0* untuk menu._`;
+    return `🛡️ *Garansi Honda*\n\nUnit baru: garansi 3 tahun atau 30.000 km\nSuku cadang resmi: garansi 6 bulan\n\nKetik *4* untuk info lebih lanjut.\n\n_Ketik *0* untuk menu._`;
   }
 
-  // Default
-  return `Maaf, saya belum mengerti permintaan Anda. 🙏\n\nKetik *0* untuk melihat menu, atau *4* untuk berbicara dengan staff kami.`;
+  // ── Default ──
+  return `Maaf, saya belum mengerti permintaan Anda. 🙏\n\nKetik *0* untuk menu lengkap, atau *4* untuk bicara dengan staff kami.`;
 }
 
 // ─── WHATSAPP API CALLS ───────────────────────────────────────────────────────
@@ -432,7 +608,6 @@ app.post('/webhook', async (req, res) => {
   }
 });
 
-// ─── DASHBOARD API ────────────────────────────────────────────────────────────
 app.get('/api/stats', (req, res) => res.json({ status: 'online' }));
 app.use(express.static('dashboard'));
 
