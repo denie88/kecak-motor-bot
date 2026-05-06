@@ -19,63 +19,215 @@ const CONFIG = {
 };
 
 // ─── KNOWLEDGE BASE ──────────────────────────────────────────────────────────
+// All prices OTR Bali — SK Mei 2026 — sudah termasuk PPN, STNK, BBN, BPKB
 const KB = {
-  // Unit prices & promotions — updated May 2026 (OTR Bali, sudah termasuk PPN, STNK, BBN, BPKB)
-  units: {
-    'honda beat': {
-      harga: 'mulai Rp 20.170.000',
-      varian: 'Beat Sporty CBS / CBS ISS / Smart Key / Street',
-      promo: 'Gratis aksesori senilai Rp 500.000 untuk pembelian bulan ini!',
+  catalog: {
+    revo: {
+      nama: 'REVO',
+      keywords: ['revo'],
+      types: [
+        { tipe: 'Revo Fit',  harga: '19.090.000' },
+        { tipe: 'Revo X',    harga: '20.810.000' },
+      ],
     },
-    'honda genio': {
-      harga: 'mulai Rp 21.410.000',
-      varian: 'Genio CBS / CBS ISS',
-      promo: 'DP ringan, proses cepat. Hubungi sales kami!',
+    suprax125: {
+      nama: 'SUPRA X 125',
+      keywords: ['supra x', 'supra'],
+      types: [
+        { tipe: 'Supra X 125 SW', harga: '22.380.000' },
+        { tipe: 'Supra X 125 CW', harga: '23.480.000' },
+      ],
     },
-    'honda scoopy': {
-      harga: 'mulai Rp 24.770.000',
-      varian: 'Scoopy Energetic / Fashion / Prestige / Stylish / Kuromi LE',
-      promo: 'Gratis helm Honda senilai Rp 300.000 untuk pembelian bulan ini!',
+    beat: {
+      nama: 'BEAT',
+      keywords: ['beat'],
+      types: [
+        { tipe: 'Beat Sporty CBS',             harga: '20.170.000' },
+        { tipe: 'Beat Sporty CBS ISS Deluxe',  harga: '20.970.000' },
+        { tipe: 'Beat Sporty DLX Smart Key',   harga: '21.580.000' },
+        { tipe: 'Beat Street',                 harga: '21.110.000' },
+      ],
     },
-    'honda vario 125': {
-      harga: 'mulai Rp 25.610.000',
-      varian: 'Vario 125 CBS / CBS ISS / Street',
-      promo: 'DP ringan mulai Rp 2.500.000. Cicilan mulai Rp 700.000/bulan.',
+    genio: {
+      nama: 'GENIO',
+      keywords: ['genio'],
+      types: [
+        { tipe: 'Genio CBS',             harga: '21.410.000' },
+        { tipe: 'Genio CBS ISS',         harga: '21.870.000' },
+        { tipe: 'Genio CBS Special Color', harga: '21.680.000' },
+      ],
     },
-    'honda stylo 160': {
-      harga: 'mulai Rp 30.720.000',
-      varian: 'Stylo 160 CBS / ABS',
-      promo: 'Model terbaru! Bonus aksesori untuk pembelian bulan ini.',
+    scoopy: {
+      nama: 'SCOOPY',
+      keywords: ['scoopy'],
+      types: [
+        { tipe: 'Scoopy Energetic Step Floor & Hook Plus', harga: '24.770.000' },
+        { tipe: 'Scoopy Energetic Spion & Hook Plus',      harga: '24.910.000' },
+        { tipe: 'Scoopy Fashion Step Floor & Hook Plus',   harga: '24.850.000' },
+        { tipe: 'Scoopy Fashion Spion & Hook Plus',        harga: '24.990.000' },
+        { tipe: 'Scoopy Fashion Special Color',            harga: '26.955.000' },
+        { tipe: 'Scoopy Prestige Step Floor & Hook Plus',  harga: '25.730.000' },
+        { tipe: 'Scoopy Stylish Step Floor & Hook Plus',   harga: '25.730.000' },
+        { tipe: 'Scoopy Kuromi Limited Edition',           harga: '26.170.000' },
+      ],
     },
-    'honda vario 160': {
-      harga: 'mulai Rp 29.960.000',
-      varian: 'Vario 160 CBS / ABS',
-      promo: 'Cashback Rp 1.000.000 untuk pembelian tunai bulan ini.',
+    vario125: {
+      nama: 'VARIO 125',
+      keywords: ['vario 125', 'vario125'],
+      types: [
+        { tipe: 'Vario 125 CBS Spion Hook Plus (Tipe 1)',     harga: '25.610.000' },
+        { tipe: 'Vario 125 CBS Spion Hook Plus (Tipe 2)',     harga: '26.190.000' },
+        { tipe: 'Vario 125 CBS ISS Spion Hook Plus (Tipe 1)', harga: '27.460.000' },
+        { tipe: 'Vario 125 CBS ISS Spion Hook Plus (Tipe 2)', harga: '28.080.000' },
+        { tipe: 'Vario 125 Street Spion Hook Plus',           harga: '28.580.000' },
+        { tipe: 'Vario 125 Street Visor Hook Plus',           harga: '28.705.000' },
+      ],
     },
-    'honda pcx 160': {
-      harga: 'mulai Rp 35.520.000',
-      varian: 'PCX 160 CBS / ABS / ABS RoadSync',
-      promo: 'Bonus aksesori + gratis servis pertama.',
+    stylo160: {
+      nama: 'STYLO 160',
+      keywords: ['stylo'],
+      types: [
+        { tipe: 'Stylo 160 CBS Step Floor Plus',       harga: '30.720.000' },
+        { tipe: 'Stylo 160 CBS Step Floor KC Plus',    harga: '30.780.000' },
+        { tipe: 'Stylo 160 CBS Special Color',         harga: '32.995.000' },
+        { tipe: 'Stylo 160 ABS Step Floor Plus',       harga: '33.820.000' },
+        { tipe: 'Stylo 160 ABS Step Floor KC Plus',    harga: '33.880.000' },
+        { tipe: 'Stylo 160 ABS SPC Step Floor Plus',   harga: '35.380.000' },
+        { tipe: 'Stylo 160 ABS Special Color',         harga: '36.095.000' },
+      ],
     },
-    'honda adv 160': {
-      harga: 'mulai Rp 38.570.000',
-      varian: 'ADV 160 CBS / ABS / ABS RoadSync',
-      promo: 'Adventure scooter terbaik! Hubungi sales untuk penawaran spesial.',
+    vario160: {
+      nama: 'VARIO 160',
+      keywords: ['vario 160', 'vario160'],
+      types: [
+        { tipe: 'Vario 160 CBS Plus (Tipe 1)',        harga: '29.960.000' },
+        { tipe: 'Vario 160 CBS Plus (Tipe 2)',        harga: '30.210.000' },
+        { tipe: 'Vario 160 ABS Plus',                 harga: '32.990.000' },
+        { tipe: 'Vario 160 CBS Spion Hook Plus (Tipe 1)', harga: '30.010.000' },
+        { tipe: 'Vario 160 CBS Spion Hook Plus (Tipe 2)', harga: '30.260.000' },
+        { tipe: 'Vario 160 ABS Spion Hook Plus',      harga: '33.040.000' },
+      ],
     },
-    'honda cbr 150r': {
-      harga: 'mulai Rp 40.240.000',
-      varian: 'CBR 150R STD / ABS',
-      promo: 'Sport bike idaman! DP dan cicilan ringan tersedia.',
+    pcx160: {
+      nama: 'PCX 160',
+      keywords: ['pcx'],
+      types: [
+        { tipe: 'PCX 160 CBS',          harga: '35.520.000' },
+        { tipe: 'PCX 160 ABS',          harga: '39.460.000' },
+        { tipe: 'PCX 160 ABS RoadSync', harga: '42.920.000' },
+      ],
+    },
+    adv160: {
+      nama: 'ADV 160',
+      keywords: ['adv'],
+      types: [
+        { tipe: 'ADV 160 CBS',          harga: '38.570.000' },
+        { tipe: 'ADV 160 ABS',          harga: '41.730.000' },
+        { tipe: 'ADV 160 ABS RoadSync', harga: '43.460.000' },
+      ],
+    },
+    supragtr: {
+      nama: 'SUPRA GTR 150',
+      keywords: ['supra gtr', 'gtr'],
+      types: [
+        { tipe: 'New Supra GTR150 Sporty',    harga: '28.230.000' },
+        { tipe: 'New Supra GTR150 Exclusive', harga: '28.480.000' },
+      ],
+    },
+    sonic: {
+      nama: 'SONIC 150R',
+      keywords: ['sonic'],
+      types: [
+        { tipe: 'Sonic 150R',            harga: '29.250.000' },
+        { tipe: 'Sonic 150R HRR',        harga: '29.650.000' },
+        { tipe: 'Sonic 150R Matte Black', harga: '29.650.000' },
+      ],
+    },
+    cb150x: {
+      nama: 'CB150X',
+      keywords: ['cb150x', 'cb 150x'],
+      types: [
+        { tipe: 'CB150X STD', harga: '35.850.000' },
+        { tipe: 'CB150X SE',  harga: '36.360.000' },
+      ],
+    },
+    verza: {
+      nama: 'CB150 VERZA',
+      keywords: ['verza'],
+      types: [
+        { tipe: 'CB150 Verza SW', harga: '25.520.000' },
+        { tipe: 'CB150 Verza CW', harga: '26.180.000' },
+      ],
+    },
+    cb150r: {
+      nama: 'CB150R STREETFIRE',
+      keywords: ['cb150r', 'streetfire'],
+      types: [
+        { tipe: 'CB150R Streetfire',                   harga: '35.260.000' },
+        { tipe: 'CB150R Streetfire Special Edition',   harga: '36.270.000' },
+      ],
+    },
+    crf150l: {
+      nama: 'CRF150L',
+      keywords: ['crf150'],
+      types: [
+        { tipe: 'CRF150L', harga: '38.760.000' },
+      ],
+    },
+    cbr150r: {
+      nama: 'CBR 150R',
+      keywords: ['cbr 150', 'cbr150'],
+      types: [
+        { tipe: 'CBR 150R STD (Tipe 1)', harga: '40.240.000' },
+        { tipe: 'CBR 150R STD (Tipe 2)', harga: '40.950.000' },
+        { tipe: 'CBR 150R ABS (Tipe 1)', harga: '44.490.000' },
+        { tipe: 'CBR 150R ABS (Tipe 2)', harga: '45.200.000' },
+      ],
+    },
+    cbr250rr: {
+      nama: 'CBR 250RR',
+      keywords: ['cbr 250', 'cbr250'],
+      types: [
+        { tipe: 'CBR 250RR STD (Tipe 1)',      harga: '76.020.000' },
+        { tipe: 'CBR 250RR STD (Tipe 2)',      harga: '80.390.000' },
+        { tipe: 'CBR 250RR ABS',               harga: '87.750.000' },
+        { tipe: 'CBR 250RR ABS + QS (Tipe 1)', harga: '91.800.000' },
+        { tipe: 'CBR 250RR ABS + QS (Tipe 2)', harga: '92.400.000' },
+      ],
+    },
+    electric: {
+      nama: 'ELECTRIC',
+      keywords: ['electric', 'listrik', 'icon e', 'cuv', 'em1'],
+      types: [
+        { tipe: 'Icon e:',             harga: '28.378.000' },
+        { tipe: 'CUV e:',              harga: '55.107.000' },
+        { tipe: 'CUV e: RoadSync Duo', harga: '60.307.000' },
+        { tipe: 'EM1 e: Charger',      harga: '46.353.000' },
+        { tipe: 'EM1 e: Plus Charger', harga: '46.853.000' },
+      ],
+    },
+    premium: {
+      nama: 'BIG BIKE / PREMIUM',
+      keywords: ['sh 150', 'sh150', 'forza', 'super cub', 'monkey', 'ct125', 'st125', 'dax', 'crf250', 'big bike', 'premium'],
+      types: [
+        { tipe: 'SH 150',         harga: '45.940.000' },
+        { tipe: 'ST125 Dax',      harga: '84.300.000' },
+        { tipe: 'CT125AM',        harga: '83.700.000' },
+        { tipe: 'Super Cub C 125', harga: '81.330.000' },
+        { tipe: 'Monkey',         harga: '89.010.000' },
+        { tipe: 'CRF250L',        harga: '92.740.000' },
+        { tipe: 'CRF250 Rally',   harga: '100.230.000' },
+        { tipe: 'Forza',          harga: '99.280.000' },
+      ],
     },
   },
 
-  // Jam operasional
   hours: 'Senin–Sabtu: 08.00–17.00 WITA\nMinggu: 09.00–14.00 WITA',
   address: 'Jl. Gatot Subroto No. 88, Denpasar, Bali',
   phone: '(0361) 123-4567',
 };
 
-// ─── RESPONSE TEMPLATES ──────────────────────────────────────────────────────
+// ─── MENU TEMPLATES ──────────────────────────────────────────────────────────
 const MENU = `🏍️ *Kecak Motor - Honda Authorized Dealer*
 
 Halo! Saya asisten virtual Kecak Motor. Ada yang bisa saya bantu?
@@ -98,17 +250,33 @@ Type your choice:
 4️⃣  Speak to staff
 0️⃣  Main menu`;
 
-function unitList() {
-  let msg = '🏍️ *Harga Unit Honda & Promo – Kecak Motor*\n';
-  msg += '_Update: Mei 2026 | OTR Bali (sudah termasuk PPN, STNK, BBN, BPKB)_\n\n';
-  for (const [name, info] of Object.entries(KB.units)) {
-    msg += `• *${name.toUpperCase()}*\n`;
-    msg += `  💰 ${info.harga}\n`;
-    msg += `  📋 ${info.varian}\n`;
-    msg += `  🎁 ${info.promo}\n\n`;
+// ─── RESPONSE FUNCTIONS ───────────────────────────────────────────────────────
+
+// Overview: all model families with entry price
+function unitOverview() {
+  let msg = '🏍️ *Daftar Model Honda – Kecak Motor*\n';
+  msg += '_OTR Bali | SK Mei 2026 | Termasuk PPN, STNK, BBN, BPKB_\n\n';
+  msg += 'Ketik nama model untuk melihat semua tipe & harga:\n\n';
+  for (const [, fam] of Object.entries(KB.catalog)) {
+    const minPrice = Math.min(...fam.types.map(t => parseInt(t.harga.replace(/\./g, ''))));
+    const hargaMin = minPrice.toLocaleString('id-ID');
+    msg += `• *${fam.nama}* — mulai Rp ${hargaMin}\n`;
   }
-  msg += '📞 Harga & promo bisa berubah sewaktu-waktu.\n';
-  msg += 'Ketik *4* untuk tanya langsung ke sales kami atau *0* untuk menu.';
+  msg += '\nContoh: ketik *beat* atau *scoopy* untuk detail lengkap.\n';
+  msg += 'Ketik *4* untuk tanya langsung ke sales kami.';
+  return msg;
+}
+
+// Detail: all types for one family
+function unitDetail(familyKey) {
+  const fam = KB.catalog[familyKey];
+  if (!fam) return null;
+  let msg = `🏍️ *${fam.nama} – Harga OTR Bali (Mei 2026)*\n\n`;
+  fam.types.forEach(t => {
+    msg += `• ${t.tipe}\n  💰 Rp ${t.harga}\n\n`;
+  });
+  msg += '📞 Harga dapat berubah sewaktu-waktu.\n';
+  msg += 'Ketik *4* untuk tanya sales atau *1* untuk daftar model lain.';
   return msg;
 }
 
@@ -137,8 +305,19 @@ function creditInfo() {
 // ─── MAIN MESSAGE ROUTER ─────────────────────────────────────────────────────
 function detectLanguage(text) {
   const enWords = ['hello', 'hi', 'help', 'price', 'stock', 'how', 'what', 'credit', 'promo'];
-  const lower = text.toLowerCase();
-  return enWords.some(w => lower.includes(w)) ? 'en' : 'id';
+  return enWords.some(w => text.toLowerCase().includes(w)) ? 'en' : 'id';
+}
+
+function findFamily(input) {
+  // Check each family's keywords
+  for (const [key, fam] of Object.entries(KB.catalog)) {
+    if (fam.keywords.some(kw => input.includes(kw))) return key;
+  }
+  // Special: "vario" alone without number → ask which one
+  if (input.includes('vario')) return 'vario_ask';
+  // Special: "cbr" alone → ask which one
+  if (input.includes('cbr')) return 'cbr_ask';
+  return null;
 }
 
 function route(from, text) {
@@ -146,46 +325,60 @@ function route(from, text) {
 
   // Menu / greeting
   if (['menu', '0', 'halo', 'hi', 'hello', 'hai', 'mulai', 'start'].some(k => input.includes(k))) {
-    const lang = detectLanguage(input);
-    return lang === 'en' ? MENU_EN : MENU;
+    return detectLanguage(input) === 'en' ? MENU_EN : MENU;
   }
 
-  // 1 — Harga motor & promo
-  if (input === '1' || input.includes('harga') || input.includes('promo') || input.includes('price')
-    || input.includes('motor') || input.includes('unit') || input.includes('stok') || input.includes('stock')
-    || input.includes('beat') || input.includes('vario') || input.includes('scoopy')
-    || input.includes('pcx') || input.includes('cbr') || input.includes('genio')
-    || input.includes('stylo') || input.includes('adv') || input.includes('murah')
-    || input.includes('berapa') || input.includes('type') || input.includes('tipe')) {
-    return unitList();
+  // 1 — Show model overview
+  if (input === '1' || input === 'harga' || input.includes('daftar motor')
+    || input.includes('list motor') || input.includes('semua motor')) {
+    return unitOverview();
+  }
+
+  // Model keyword → show specific family detail
+  if (input.includes('harga') || input.includes('berapa') || input.includes('tipe')
+    || input.includes('type') || input.includes('promo') || input.includes('motor')
+    || input.includes('unit') || input.includes('stok') || input.includes('stock')
+    || input.match(/\b(revo|beat|genio|scoopy|vario|stylo|pcx|adv|sonic|verza|cbr|crf|forza|monkey)\b/)) {
+    const familyKey = findFamily(input);
+    if (familyKey === 'vario_ask') {
+      return `Anda mencari Vario tipe berapa?\n\n• Ketik *vario 125* untuk Vario 125\n• Ketik *vario 160* untuk Vario 160\n• Ketik *stylo* untuk Stylo 160`;
+    }
+    if (familyKey === 'cbr_ask') {
+      return `Anda mencari CBR tipe berapa?\n\n• Ketik *cbr 150* untuk CBR 150R\n• Ketik *cbr 250* untuk CBR 250RR`;
+    }
+    if (familyKey) return unitDetail(familyKey);
+    return unitOverview();
   }
 
   // 2 — Jam & lokasi
   if (input === '2' || input.includes('jam') || input.includes('alamat') || input.includes('lokasi')
-    || input.includes('address') || input.includes('location') || input.includes('hours')) {
+    || input.includes('address') || input.includes('location') || input.includes('hours')
+    || input.includes('buka') || input.includes('tutup')) {
     return locationInfo();
   }
 
   // 3 — Kredit & pembiayaan
   if (input === '3' || input.includes('kredit') || input.includes('cicil') || input.includes('dp')
-    || input.includes('finance') || input.includes('loan') || input.includes('angsuran')) {
+    || input.includes('finance') || input.includes('loan') || input.includes('angsuran')
+    || input.includes('tenor')) {
     return creditInfo();
   }
 
   // 4 — Escalate to staff
   if (input === '4' || input.includes('staff') || input.includes('sales') || input.includes('manusia')
-    || input.includes('human') || input.includes('cs') || input.includes('admin')) {
+    || input.includes('human') || input.includes('cs') || input.includes('admin')
+    || input.includes('hubungi')) {
     notifyStaff({ type: 'escalation', phone: from, message: text });
     return `👤 Oke! Saya sudah menghubungi staff kami.\n\nStaff kami akan membalas dalam beberapa menit.\n\nJam operasional: ${KB.hours}\n\n_Ketik *0* untuk menu._`;
   }
 
-  // Warranty catch-all
+  // Warranty
   if (input.includes('warranty') || input.includes('garansi')) {
-    return `🛡️ *Garansi Honda*\n\nUnit baru: garansi 3 tahun atau 30.000 km\nSuku cadang resmi: garansi 6 bulan\n\nUntuk info lebih lanjut, ketik *4* untuk chat dengan staff kami.\n\n_Ketik *0* untuk menu._`;
+    return `🛡️ *Garansi Honda*\n\nUnit baru: garansi 3 tahun atau 30.000 km\nSuku cadang resmi: garansi 6 bulan\n\nUntuk klaim garansi, ketik *4* untuk chat dengan staff kami.\n\n_Ketik *0* untuk menu._`;
   }
 
   // Default
-  return `Maaf, saya belum mengerti permintaan Anda. 🙏\n\nKetik *0* untuk melihat menu lengkap, atau *4* untuk berbicara dengan staff kami.`;
+  return `Maaf, saya belum mengerti permintaan Anda. 🙏\n\nKetik *0* untuk melihat menu, atau *4* untuk berbicara dengan staff kami.`;
 }
 
 // ─── WHATSAPP API CALLS ───────────────────────────────────────────────────────
@@ -224,30 +417,23 @@ app.get('/webhook', (req, res) => {
 
 app.post('/webhook', async (req, res) => {
   res.sendStatus(200);
-
   try {
     const entry = req.body.entry?.[0]?.changes?.[0]?.value;
     const msg = entry?.messages?.[0];
     if (!msg || msg.type !== 'text') return;
-
     const from = msg.from;
     const text = msg.text.body;
     console.log(`[IN] ${from}: ${text}`);
-
     const reply = route(from, text);
     console.log(`[OUT] ${from}: ${reply.substring(0, 60)}...`);
     await sendMessage(from, reply);
-
   } catch (err) {
     console.error('Webhook error:', err);
   }
 });
 
 // ─── DASHBOARD API ────────────────────────────────────────────────────────────
-app.get('/api/stats', (req, res) => {
-  res.json({ status: 'online' });
-});
-
+app.get('/api/stats', (req, res) => res.json({ status: 'online' }));
 app.use(express.static('dashboard'));
 
 app.listen(CONFIG.PORT, () => {
